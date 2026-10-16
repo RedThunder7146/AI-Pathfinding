@@ -3,13 +3,9 @@ using UnityEngine.AI;
 
 public class EnemyAI : MonoBehaviour
 {
-
-
-    public Transform[] points;
     private NavMeshAgent nav;
-    private int destPoint;
-
-
+    public Transform pacman;
+    
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -19,18 +15,10 @@ public class EnemyAI : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (!nav.pathPending && nav.remainingDistance < 0.5f)
-            GoToNextPoint();
+        GoToPacman();
     }
-
-
-    void GoToNextPoint()
+    void GoToPacman()
     {
-        if (points.Length == 0)
-        {
-            return;
-        }
-        nav.destination = points[destPoint].position;
-        destPoint = (destPoint + 1) % points.Length;
+        nav.destination= pacman.position;
     }
 }
